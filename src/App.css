@@ -1,38 +1,59 @@
-.App {
-  text-align: center;
+.app-container {
+    padding: 20px;
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-evenly;
+    background-color: rgb(249, 245, 237);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.map-container {
+    width: calc(60vw);
+    height: calc(100vh - 40px);
+    border-radius: 15px;
+    overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.list-container {
+    height: calc(100vh - 40px);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 0px 30px 0px 30px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.card-list-container {
+    padding: 5px 20px;
+    overflow-y: scroll;
+    flex-grow: 1;
 }
 
-.App-link {
-  color: #61dafb;
+.card-list-container > :last-child {
+    margin-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.arrow-buttons {
+    text-align: center;
+}
+
+.card {
+    max-width: 90%;
+    padding: 10px 15px;
+    background-color: white;
+    margin: 0px 0px 15px 0px;
+    border-radius: 15px;
+    font-size: small;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.active-card {
+    box-shadow: 4px 4px 1px 0px rgb(136, 136, 136);
+}
+
+.list-controls-container {
+    width: 100%;
+    /* outline: solid 1px black; */
+    margin: 15px 0px 15px 0px;
 }
