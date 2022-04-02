@@ -1,31 +1,31 @@
 import React, { useCallback, useRef } from 'react'
 import { useEffect } from 'react'
+import { Place } from '../Map'
 
-interface ListCardProps {
-    map: any
-    onClick: any
-    place: any
+interface PlaceCardProps {
+    onClick: (place: Place) => void
+    place: Place
     active: boolean
 }
 
-const ListCard = ({ map, onClick, place, active }: ListCardProps) => {
-    const { title, description, date, coordinates } = place
+const PlaceCard = ({ onClick, place, active }: PlaceCardProps) => {
+    const { title, description, date } = place
     const cardRef = useRef<any>(null)
 
-    const executeScroll = () => {
+    const executeScroll = useCallback(() => {
         if (cardRef.current)
             cardRef.current.scrollIntoView({ behavior: `smooth` })
-    }
+    }, [])
 
     useEffect(() => {
-        executeScroll()
-    }, [active])
+        if (active) {
+            executeScroll()
+        }
+    }, [active, executeScroll])
 
     const handleClick = useCallback(() => {
-        if (map) {
-            onClick(place)
-        }
-    }, [map, onClick, place])
+        onClick(place)
+    }, [onClick, place])
 
     return (
         <div
@@ -40,4 +40,4 @@ const ListCard = ({ map, onClick, place, active }: ListCardProps) => {
     )
 }
 
-export default ListCard
+export default PlaceCard

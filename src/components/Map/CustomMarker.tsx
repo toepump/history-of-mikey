@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import mapboxgl, { MarkerOptions } from 'mapbox-gl'
 
 interface CustomMarkerProps extends MarkerOptions {
@@ -25,7 +25,7 @@ const CustomMarker = ({ map, place, active }: CustomMarkerProps) => {
     }, [coordinates, map])
 
     // add popup when active
-    useEffect((): any => {
+    useEffect(() => {
         const popup = new mapboxgl.Popup({
             offset: 25,
             closeOnClick: false,
@@ -38,10 +38,12 @@ const CustomMarker = ({ map, place, active }: CustomMarkerProps) => {
             popup
                 .setLngLat(coordinates)
                 .setHTML(
-                    `<div>
+                    `
+                        <div>
                             <h4>${title}</h4>
                             <p>${description}</p>
-                        </div>`
+                        </div>
+                    `
                 )
                 .addTo(map)
         } else {

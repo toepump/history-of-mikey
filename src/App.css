@@ -21,8 +21,9 @@
     padding: 0px 30px 0px 30px;
 }
 
-.card-list-container {
+.card-list {
     padding: 5px 20px;
+    scroll-padding: 5px 20px;
     overflow-y: scroll;
     flex-grow: 1;
 }
