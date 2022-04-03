@@ -1,18 +1,20 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import mapboxgl, { MarkerOptions } from 'mapbox-gl'
+import { Place } from '../../places'
 
 interface CustomMarkerProps extends MarkerOptions {
-    map: any
-    place: any
+    map: mapboxgl.Map
+    place: Place
     active: boolean
 }
 
 const CustomMarker = ({ map, place, active }: CustomMarkerProps) => {
-    const { title, description, coordinates } = place
+    const { title, date, description, coordinates, img } = place
+    const popupRef = useRef<HTMLDivElement>(null)
 
-    // initial render always create the marker
+    // create the marker
     useEffect(() => {
-        // create isntance of mapbox marker and add to map
+        // create instance of marker and add to map
         const marker = new mapboxgl.Marker({
             color: '#ff685d',
         })
@@ -34,17 +36,11 @@ const CustomMarker = ({ map, place, active }: CustomMarkerProps) => {
             anchor: 'bottom',
         })
 
+        // if this is marker is active, show the popup
         if (active) {
             popup
                 .setLngLat(coordinates)
-                .setHTML(
-                    `
-                        <div>
-                            <h4>${title}</h4>
-                            <p>${description}</p>
-                        </div>
-                    `
-                )
+                .setDOMContent(popupRef.current as HTMLDivElement)
                 .addTo(map)
         } else {
             popup.remove()
@@ -53,9 +49,18 @@ const CustomMarker = ({ map, place, active }: CustomMarkerProps) => {
         return () => {
             popup.remove()
         }
-    }, [active, coordinates, description, map, title])
+    }, [active, coordinates, date, description, img, map, title])
 
-    return <></>
+    return (
+        <div className='hidden'>
+            <div className='popup' ref={popupRef}>
+                <h4>{title}</h4>
+                <p>{description}</p>
+                <img src={img} />
+                <span>{date.toDateString()}</span>
+            </div>
+        </div>
+    )
 }
 
 export default CustomMarker

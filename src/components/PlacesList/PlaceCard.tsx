@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { useEffect } from 'react'
-import { Place } from '../Map'
+import { Place } from '../../places'
 
 interface PlaceCardProps {
     onClick: (place: Place) => void
@@ -10,18 +10,14 @@ interface PlaceCardProps {
 
 const PlaceCard = ({ onClick, place, active }: PlaceCardProps) => {
     const { title, description, date } = place
-    const cardRef = useRef<any>(null)
-
-    const executeScroll = useCallback(() => {
-        if (cardRef.current)
-            cardRef.current.scrollIntoView({ behavior: `smooth` })
-    }, [])
+    const cardRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if (active) {
-            executeScroll()
+            if (cardRef.current)
+                cardRef.current.scrollIntoView({ behavior: `smooth` })
         }
-    }, [active, executeScroll])
+    }, [active])
 
     const handleClick = useCallback(() => {
         onClick(place)
@@ -35,7 +31,7 @@ const PlaceCard = ({ onClick, place, active }: PlaceCardProps) => {
         >
             <h3>{title}</h3>
             <p>{description}</p>
-            <p>{date.toString()}</p>
+            <p>{date.toDateString()}</p>
         </div>
     )
 }

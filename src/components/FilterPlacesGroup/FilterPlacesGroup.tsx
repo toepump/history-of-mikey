@@ -1,38 +1,37 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import CheckBox from '../CheckBox'
-import { Place } from '../Map'
-import useFilters from './useFilters'
+import { Place } from '../../places'
+import useFilterGroup from './useFilters'
 
 interface FilterPlacesGroup {
     places: Place[]
-    onChange: any
+    onChange: (updatedList: Place[]) => void
 }
 
 const FilterPlacesGroup = ({ places, onChange }: FilterPlacesGroup) => {
-    const { filterStates, applyFilter, filteredResult } = useFilters(places)
+    const { filterStates, applyFilter } = useFilterGroup(places)
 
     const onFilterChange = useCallback(
-        (label: string, active: boolean) => {
-            applyFilter(label, active)
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            const newList = applyFilter(event.target.value, event.target.checked)
+            onChange(newList)
         },
-        [applyFilter]
+        [applyFilter, onChange]
     )
-
-    useEffect(() => {
-        onChange(filteredResult)
-    }, [filteredResult, onChange])
 
     return (
         <>
             <h3>Filter</h3>
-            {filterStates &&
-                Object.keys(filterStates).map((label: string) => (
-                    <CheckBox
-                        key={label}
-                        label={label}
-                        onChange={onFilterChange}
-                    />
-                ))}
+            <div className='filters-list'>
+                {filterStates &&
+                    Object.keys(filterStates).map((label: string) => (
+                        <CheckBox
+                            key={label}
+                            label={label}
+                            onChange={onFilterChange}
+                        />
+                    ))}
+            </div>
         </>
     )
 }

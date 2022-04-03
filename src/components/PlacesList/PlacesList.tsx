@@ -1,5 +1,4 @@
-import React from 'react'
-import { Place } from '../Map'
+import { Place } from '../../places'
 import PlaceCard from './PlaceCard'
 
 interface PlacesListProps {
@@ -8,10 +7,13 @@ interface PlacesListProps {
     onPlaceClick: (place: Place) => void
 }
 
-const PlacesList = ({ places, currentPlace, onPlaceClick }: PlacesListProps) => {
+const PlacesList = ({
+    places,
+    currentPlace,
+    onPlaceClick,
+}: PlacesListProps) => {
     return (
         <>
-            <h3>Places</h3>
             <div className='card-list'>
                 {places.map((place: Place) => {
                     return (

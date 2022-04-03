@@ -1,60 +1,36 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import RadioButton from '../RadioButton'
-import { Place } from '../Map'
 
 interface SortGroupProps {
-    places: Place[]
-    onChange: any
+    onChange: (mode: string) => void
 }
 
-const SortGroup = ({ places, onChange }: SortGroupProps) => {
-    const [checkedValue, setCheckedValue] = useState('chronological')
-
-    // callback to sort the list of filtered places
-    const sortVisiblePlaces = useCallback(
-        (mode: string) => {
-            let newList: Place[] = []
-            switch (mode) {
-                case 'alphabetical': {
-                    newList = places.sort((a, b) =>
-                        a.title > b.title ? 1 : -1
-                    )
-                    break
-                }
-                case 'chronological': {
-                    newList = places.sort((a, b) => (a.date > b.date ? 1 : -1))
-                    break
-                }
-                default: {
-                    break
-                }
-            }
-            onChange(newList)
-        },
-        [onChange, places]
-    )
+const SortGroup = ({ onChange }: SortGroupProps) => {
+    const [checkedValue, setCheckedValue] = useState('date')
 
     const onChangeValue = useCallback(
         (event) => {
             setCheckedValue(event.target.value)
-            sortVisiblePlaces(event.target.value)
+            onChange(event.target.value)
         },
-        [sortVisiblePlaces]
+        [onChange]
     )
 
     return (
         <>
             <h3>Sort</h3>
-            <RadioButton
-                label='alphabetical'
-                onChange={onChangeValue}
-                checked={checkedValue === 'alphabetical'}
-            />
-            <RadioButton
-                label='chronological'
-                onChange={onChangeValue}
-                checked={checkedValue === 'chronological'}
-            />
+            <div className='sort-container'>
+                <RadioButton
+                    label='title'
+                    onChange={onChangeValue}
+                    checked={checkedValue === 'title'}
+                />
+                <RadioButton
+                    label='date'
+                    onChange={onChangeValue}
+                    checked={checkedValue === 'date'}
+                />
+            </div>
         </>
     )
 }

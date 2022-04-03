@@ -1,6 +1,8 @@
+import React from "react"
+
 interface RadioButtonProps {
     label: string
-    onChange: any
+    onChange: (event: React.ChangeEvent) => void
     checked: boolean
 }
 

@@ -1,22 +1,24 @@
 import { useCallback } from 'react'
-import { Place } from '../Map'
+import { Place } from '../../places'
 
 interface PrevNextPlaceButtonsProps {
     places: Place[]
     currentPlace: Place
-    updateCurrentPlace: any
+    updateCurrentPlace: React.Dispatch<React.SetStateAction<Place>>
 }
 
-const PrevNextPlaceButtons = ({ places, currentPlace, updateCurrentPlace }: PrevNextPlaceButtonsProps) => {
+const PrevNextPlaceButtons = ({
+    places,
+    currentPlace,
+    updateCurrentPlace,
+}: PrevNextPlaceButtonsProps) => {
     const goToNext = useCallback(() => {
         const currentIndex = places.findIndex(
             (place) => place.title === currentPlace.title
         )
 
         const nextIndex =
-            currentIndex + 1 >= places.length
-                ? currentIndex
-                : currentIndex + 1
+            currentIndex + 1 >= places.length ? currentIndex : currentIndex + 1
 
         updateCurrentPlace(places[nextIndex])
     }, [currentPlace, updateCurrentPlace, places])
@@ -33,8 +35,8 @@ const PrevNextPlaceButtons = ({ places, currentPlace, updateCurrentPlace }: Prev
 
     return (
         <div className='arrow-buttons'>
-            <button onClick={goToPrev}>Prev</button>
-            <button onClick={goToNext}>Next</button>
+            <button className='prev-button' onClick={goToPrev}>Prev</button>
+            <button className='next-button' onClick={goToNext}>Next</button>
         </div>
     )
 }

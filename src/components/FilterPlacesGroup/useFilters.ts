@@ -1,24 +1,20 @@
 import { useEffect, useState, useCallback } from 'react'
-import { Place } from '../Map'
+import { Place } from '../../places'
+import { createFilterStates, filter, FilterState } from './utils'
 
-// TODO: make thie type more generic and update according logic
-const useFilters = (list: Place[]) => {
-    const [filterStates, setFilterStates] = useState<Record<string, boolean>>(
+const useFilterGroup = (list: Place[]) => {
+    const [filterStates, setFilterStates] = useState<FilterState>(
         {}
     )
-    const [filteredResult, setFilteredResult] = useState(list)
 
+    // on initial render, create filter states to track
     useEffect(() => {
         const filtersList = [...new Set(list.map((place) => place.type))]
-        const filterObject: Record<string, boolean> = {}
-        filtersList.forEach((filter) => {
-            if (!filterObject[filter]) {
-                filterObject[filter] = true
-            }
-        })
-        setFilterStates(filterObject)
+        const filtersState: FilterState = createFilterStates(filtersList)
+        setFilterStates(filtersState)
     }, [list])
 
+    // callback to apply filters and update state
     const applyFilter = useCallback(
         (label: string, active: boolean) => {
             // update filterStates
@@ -26,24 +22,15 @@ const useFilters = (list: Place[]) => {
             nextFilterStates[label] = active
             setFilterStates(nextFilterStates)
 
-            const activeFilters: string[] = []
-            Object.entries(nextFilterStates).forEach(([key, val]) => {
-                if (val) activeFilters.push(key)
-            })
-
-            const nextFilteredResult = list.filter((place) =>
-                activeFilters.includes(place.type)
-            )
-            setFilteredResult(nextFilteredResult)
+            return filter(list, nextFilterStates)
         },
         [filterStates, list]
     )
 
     return {
-        filteredResult,
         filterStates,
         applyFilter,
     }
 }
 
-export default useFilters
+export default useFilterGroup

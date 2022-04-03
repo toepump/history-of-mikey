@@ -1,0 +1,84 @@
+import { render, screen, fireEvent } from '@testing-library/react'
+import FilterPlacesGroup from '../FilterPlacesGroup'
+
+// test data sorted chronologically
+const fakePlaces = [
+    {
+        title: 'B',
+        description: 'test1',
+        date: new Date('1994-04-17'),
+        coordinates: [-121.91, 36.6177],
+        type: 'life',
+    },
+    {
+        title: 'C',
+        description: 'test2',
+        date: new Date('2010-08-10'),
+        coordinates: [136.9674, 37.0429],
+        type: 'work',
+    },
+    {
+        title: 'A',
+        description: 'test3',
+        date: new Date('2022-08-10'),
+        coordinates: [136.9674, 37.0429],
+        type: 'education',
+    },
+]
+
+const workPlaces = [fakePlaces[1]]
+
+const educationPlaces = [fakePlaces[2]]
+
+describe('FilterPlacesGroup', () => {
+    test('Should render a FilterPlacesGroup component without error.', () => {
+        const onChange = jest.fn()
+        render(<FilterPlacesGroup places={fakePlaces} onChange={onChange} />)
+
+        // assert group title is displayed
+        const filterTitle = screen.getByText('Filter')
+        expect(filterTitle).toBeInTheDocument()
+
+        // assert all check buttons were generated from the unique "types" found in the input lis of places
+        const lifeBtn = screen.getByText(/life/i)
+        expect(lifeBtn).toBeInTheDocument()
+
+        const workBtn = screen.getByText(/work/i)
+        expect(workBtn).toBeInTheDocument()
+
+        const educationBtn = screen.getByText(/education/i)
+        expect(educationBtn).toBeInTheDocument()
+    })
+    test('Should sort input list and call onChange with correctly sorted lists.', () => {
+        const onChange = jest.fn()
+        render(<FilterPlacesGroup places={fakePlaces} onChange={onChange} />)
+
+        // simulate click to filter out life places
+        fireEvent.click(screen.getByText(/life/i))
+        expect(onChange).toHaveBeenCalledWith([
+            ...workPlaces,
+            ...educationPlaces,
+        ])
+        expect(onChange).toHaveBeenCalledTimes(1)
+
+        // simulate click to filter out work places
+        fireEvent.click(screen.getByText(/work/i))
+        expect(onChange).toHaveBeenCalledWith([...educationPlaces])
+        expect(onChange).toHaveBeenCalledTimes(2)
+
+        // simulate click to filter out education places
+        fireEvent.click(screen.getByText(/education/i))
+        expect(onChange).toHaveBeenCalledWith([])
+        expect(onChange).toHaveBeenCalledTimes(3)
+
+        // filter back in life places
+        fireEvent.click(screen.getByText(/life/i))
+        // filter back in work places
+        fireEvent.click(screen.getByText(/work/i))
+        // filter back in education places
+        fireEvent.click(screen.getByText(/education/i))
+        // by this point, the onChange should have been called with all places filtered back in
+        expect(onChange).toHaveBeenCalledWith(fakePlaces)
+        expect(onChange).toHaveBeenCalledTimes(6)
+    })
+})

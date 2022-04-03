@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import CustomMarker from './CustomMarker'
-import { Place } from '../Map'
+import { Place } from '../../places'
 
 interface CustomMapProps {
     currentPlace: Place
@@ -9,26 +9,25 @@ interface CustomMapProps {
 }
 
 const CustomMap = ({ currentPlace, visiblePlaces }: CustomMapProps) => {
-    const mapContainerRef = useRef<any>(null)
+    const mapContainerRef = useRef<HTMLDivElement>(null)
     const [map, setMap] = useState<mapboxgl.Map | null>(null)
 
     // initialize mapbox map
     useEffect(() => {
         if (!map) {
             const map: mapboxgl.Map = new mapboxgl.Map({
-                container: mapContainerRef.current,
+                container: mapContainerRef.current as HTMLDivElement,
                 accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
                 style: 'mapbox://styles/mapbox/outdoors-v11',
-                center: currentPlace.coordinates as mapboxgl.LngLatLike,
-                zoom: 10,
-                // pitch: 25,
+                center: [-121.91, 36.6177] as mapboxgl.LngLatLike,
+                zoom: 5,
+                pitch: 40,
                 attributionControl: false,
             })
             setMap(map)
         }
         return () => map?.remove()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [map])
 
     // fly to currentPlace whenever it changes
     useEffect(() => {
@@ -41,13 +40,16 @@ const CustomMap = ({ currentPlace, visiblePlaces }: CustomMapProps) => {
         <div ref={mapContainerRef} className='map-container'>
             {map &&
                 visiblePlaces.map((place: Place) => {
+                    const active = currentPlace.title === place.title
                     return (
-                        <CustomMarker
-                            map={map}
-                            key={place.title}
-                            place={place}
-                            active={currentPlace.title === place.title}
-                        />
+                        active && (
+                            <CustomMarker
+                                map={map}
+                                key={place.title}
+                                place={place}
+                                active={active}
+                            />
+                        )
                     )
                 })}
         </div>

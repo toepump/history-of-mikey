@@ -1,17 +1,17 @@
-import { useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 interface CheckBoxProps {
     label: string
-    onChange: (value: string, checked: boolean) => void
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const CheckBox = ({ label, onChange }: CheckBoxProps) => {
     const [active, setActive] = useState(true)
 
     const handleChange = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            setActive(e.target.checked)
-            onChange(e.target.value, e.target.checked)
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            setActive(event.target.checked)
+            onChange(event)
         },
         [onChange]
     )
