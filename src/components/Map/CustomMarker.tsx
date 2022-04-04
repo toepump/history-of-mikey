@@ -62,7 +62,9 @@ const CustomMarker = ({ map, place, active }: CustomMarkerProps) => {
                         <h4 className='popup-title'>{title}</h4>
                         <p className='popup-description'>{description}</p>
                         <img className='popup-img' src={img} />
-                        <span className='popup-date'>{date.toDateString()}</span>
+                        <span className='popup-date'>
+                            {date.toDateString()}
+                        </span>
                     </div>
                 </div>
             )}

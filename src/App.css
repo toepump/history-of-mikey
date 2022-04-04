@@ -1,5 +1,5 @@
 .app-container {
-    padding: 20px;
+    padding: 30px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -8,13 +8,13 @@
 
 .map-container {
     width: 60vw;
-    height: calc(100vh - 40px);
+    height: calc(100vh - 60px);
     border-radius: 15px;
     overflow: hidden;
 }
 
 .list-area-container {
-    height: calc(100vh - 40px);
+    height: calc(100vh - 60px);
     display: flex;
     flex: 1;
     flex-direction: column;

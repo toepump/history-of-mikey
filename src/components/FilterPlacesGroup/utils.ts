@@ -3,7 +3,7 @@ import { Place } from '../../places'
 export type FilterState = Record<string, boolean>
 
 // util to create filter states given a list of strings represented the types to filter by
-// ex: { 'date': true, 'education': false, 'life': true } 
+// ex: { 'date': true, 'education': false, 'life': true }
 export const createFilterStates = (filtersList: string[]) => {
     const filterObject: FilterState = {}
     filtersList.forEach((filter) => {

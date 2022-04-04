@@ -16,13 +16,7 @@ window.HTMLElement.prototype.scrollIntoView = jest.fn()
 describe('PlaceCard', () => {
     test('Should render a PlaceCard component without error.', () => {
         const onChange = jest.fn()
-        render(
-            <PlaceCard
-                onClick={onChange}
-                place={fakePlace}
-                active={true}
-            />
-        )
+        render(<PlaceCard onClick={onChange} place={fakePlace} active={true} />)
 
         // assert title is displayed
         const cardTitle = screen.getByText(/Monterey, California, USA/i)
@@ -36,13 +30,7 @@ describe('PlaceCard', () => {
     })
     test('Should update the checked state of the checkbox and call the onChange callback when clicked.', () => {
         const onChange = jest.fn()
-        render(
-            <PlaceCard
-                onClick={onChange}
-                place={fakePlace}
-                active={true}
-            />
-        )
+        render(<PlaceCard onClick={onChange} place={fakePlace} active={true} />)
 
         // simulate click
         fireEvent.click(screen.getByText(/Monterey, California, USA/i))

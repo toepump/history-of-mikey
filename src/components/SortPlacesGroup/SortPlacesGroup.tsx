@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { SortableKeys } from '../../places'
-import RadioButton from '../RadioButton'
+import { RadioButton } from '../common'
 
 interface SortGroupProps {
     onChange: (mode: SortableKeys) => void

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import CheckBox from '../CheckBox'
+import { CheckBox } from '../common'
 import { Place } from '../../places'
 import useFilterGroup from './useFilters'
 
