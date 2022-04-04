@@ -27,7 +27,7 @@ For this project I decided to make a list of places featuring some life mileston
 
 ## Approach
 
-My goal was to check all the boxes in the checklist above, but specifically to try to do so in as simply as possible.
+My goal was to check all the boxes in the checklist above, but specifically to try to do so in as simple a way as possible.
 
 I wanted to:
 - be able to keep track of as little state as possible at the top level.
