@@ -1,6 +1,8 @@
 ## Introduction!
 
-Hi! My name is Michael Kentaro Cho!
+Hi! My name is Michael Kentaro Cho! I'm a frontend engineer at BAE Systems where I work on the Geospatial Exploitation Product (GXP)!
+
+For this project I decided to make a list of places featuring some milestones and hobbies of mine! I tried to keep it interesting and brief, I promise!
 
 ## Getting Started
 

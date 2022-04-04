@@ -3,6 +3,10 @@ import mapboxgl from 'mapbox-gl'
 import CustomMarker from './CustomMarker'
 import { Place } from '../../places'
 
+// NOTE: Don't normally commit keys like this.
+// Doing it for convenience now, will cancel/refresh token in the near future.
+const mapboxApiToken = 'pk.eyJ1IjoidG9lcHVtcCIsImEiOiJjbDFiZjg1cnowNGMxM2NucWFneXdmYjcxIn0.y44OMV1bLgl8pQgeLvYvmQ'
+
 interface CustomMapProps {
     currentPlace: Place
     visiblePlaces: Place[]
@@ -22,7 +26,7 @@ const CustomMap = ({ currentPlace, visiblePlaces }: CustomMapProps) => {
         if (!map) {
             const map: mapboxgl.Map = new mapboxgl.Map({
                 container: mapContainerRef.current as HTMLDivElement,
-                accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
+                accessToken: mapboxApiToken,
                 style: 'mapbox://styles/mapbox/outdoors-v11',
                 center: [-121.91, 36.6177] as mapboxgl.LngLatLike,
                 zoom: 5,
@@ -37,7 +41,7 @@ const CustomMap = ({ currentPlace, visiblePlaces }: CustomMapProps) => {
     // fly to currentPlace whenever it changes
     useEffect(() => {
         if (map && currentPlace)
-            map.flyTo({ center: currentPlace.coordinates, zoom: 10 })
+            map.flyTo({ center: currentPlace.coordinates, zoom: 10, offset: [0, 150] })
     }, [map, currentPlace])
 
     // render markers for all visible places
