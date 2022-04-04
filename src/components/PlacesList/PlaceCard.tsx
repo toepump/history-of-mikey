@@ -8,10 +8,16 @@ interface PlaceCardProps {
     active: boolean
 }
 
+/* 
+    Component to render display details for a Place on a card.
+    When card is active, scrolls card into view (sometimes awkward...)
+    When card is clicked, sends place data to callback.
+*/
 const PlaceCard = ({ onClick, place, active }: PlaceCardProps) => {
     const { title, description, date } = place
     const cardRef = useRef<HTMLDivElement>(null)
 
+    // not needed but nice to make sure card is in view if active
     useEffect(() => {
         if (active) {
             if (cardRef.current)

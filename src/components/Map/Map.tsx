@@ -8,6 +8,11 @@ interface CustomMapProps {
     visiblePlaces: Place[]
 }
 
+/* 
+    Component to wrap mapboxgl Map.
+    Given a list of places, shows custom markers for each.
+    Given a currentPlace, flies map to the current place.
+*/
 const CustomMap = ({ currentPlace, visiblePlaces }: CustomMapProps) => {
     const mapContainerRef = useRef<HTMLDivElement>(null)
     const [map, setMap] = useState<mapboxgl.Map | null>(null)
@@ -21,7 +26,7 @@ const CustomMap = ({ currentPlace, visiblePlaces }: CustomMapProps) => {
                 style: 'mapbox://styles/mapbox/outdoors-v11',
                 center: [-121.91, 36.6177] as mapboxgl.LngLatLike,
                 zoom: 5,
-                pitch: 40,
+                pitch: 30,
                 attributionControl: false,
             })
             setMap(map)
@@ -42,14 +47,12 @@ const CustomMap = ({ currentPlace, visiblePlaces }: CustomMapProps) => {
                 visiblePlaces.map((place: Place) => {
                     const active = currentPlace.title === place.title
                     return (
-                        active && (
-                            <CustomMarker
-                                map={map}
-                                key={place.title}
-                                place={place}
-                                active={active}
-                            />
-                        )
+                        <CustomMarker
+                            map={map}
+                            key={place.title}
+                            place={place}
+                            active={active}
+                        />
                     )
                 })}
         </div>

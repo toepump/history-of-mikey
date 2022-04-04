@@ -1,3 +1,5 @@
+export type SortableKeys = 'title' | 'date'
+
 export type Place = {
     description: string
     title: string
@@ -7,39 +9,43 @@ export type Place = {
     img?: string
 }
 
-const places = {
+const places: Record<string, Place[]> = {
     entries: [
         {
             title: 'Pacific Grove, California',
-            description: 'I was born in 1994 and have lived most of my life here.',
+            description:
+                'I was born in 1994 and have lived most of my life here.',
             date: new Date('1994-04-18'),
             coordinates: [-121.91, 36.6177],
             type: 'life',
-            img: '/baby.jpg'
+            img: '/baby.jpg',
         },
         {
             title: 'Hayama, Japan',
-            description: "Growing up, I visited my grandmother's home in Hayama for summer breaks with my sister.",
+            description:
+                "Growing up, I visited my grandmother's home in Hayama for summer breaks with my sister.",
             date: new Date('2001-06-18'),
-            coordinates: [139.5862, 35.2720],
+            coordinates: [139.5862, 35.272],
             type: 'life',
-            img: '/hayama.jpg'
+            img: '/hayama.jpg',
         },
         {
             title: 'Monterey, California',
-            description: 'I became a huge jazz nerd and in highschool I ended up performing at the world famous Monterey Jazz Festival. I almost pursued a career in music!',
+            description:
+                'I became a huge jazz nerd and in highschool I ended up performing at the world famous Monterey Jazz Festival. I almost pursued a career in music!',
             date: new Date('2010-07-18'),
             coordinates: [-121.8635, 36.5947],
             type: 'life',
-            img: '/mjf.jpg'
+            img: '/mjf.jpg',
         },
         {
             title: 'Nanao, Japan',
-            description: "I even performed in the Monterey Jazz Festival in Noto (Monterey's sister city)!",
+            description:
+                "I even performed in the Monterey Jazz Festival in Noto (Monterey's sister city)!",
             date: new Date('2010-08-18'),
             coordinates: [136.9674, 37.0429],
             type: 'life',
-            img: '/nanao.jpg'
+            img: '/nanao.jpg',
         },
         {
             title: 'La Jolla, California',
@@ -48,7 +54,7 @@ const places = {
             date: new Date('2014-08-10'),
             coordinates: [-117.234, 32.8801],
             type: 'education',
-            img: '/ucsd.jpg'
+            img: '/ucsd.jpg',
         },
         {
             title: 'Sendai, Japan',
@@ -57,7 +63,7 @@ const places = {
             date: new Date('2016-09-25'),
             coordinates: [140.8694, 38.2682],
             type: 'education',
-            img: '/tohoku.jpg'
+            img: '/tohoku.jpg',
         },
         {
             title: 'Mount Fuji',
@@ -66,15 +72,16 @@ const places = {
             date: new Date('2017-08-20'),
             coordinates: [138.7274, 35.3606],
             type: 'life',
-            img: '/fuji.jpg'
+            img: '/fuji.jpg',
         },
         {
             title: 'San Diego, California',
-            description: 'I graduated from UCSD in 2019 and since then, I have been building the frontend for the Geospatial Expoloitation Product (GXP) at BAE Systems.',
+            description:
+                'I graduated from UCSD in 2019 and since then, I have been building the frontend for the Geospatial Expoloitation Product (GXP) at BAE Systems.',
             date: new Date('2019-04-01'),
             coordinates: [-117.0918, 33.0104],
             type: 'work',
-            img: '/bae.jpg'
+            img: '/bae.jpg',
         },
     ],
 }

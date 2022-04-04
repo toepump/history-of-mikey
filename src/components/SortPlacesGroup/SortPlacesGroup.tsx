@@ -1,11 +1,16 @@
 import { useState, useCallback } from 'react'
+import { SortableKeys } from '../../places'
 import RadioButton from '../RadioButton'
 
 interface SortGroupProps {
-    onChange: (mode: string) => void
+    onChange: (mode: SortableKeys) => void
 }
 
-const SortGroup = ({ onChange }: SortGroupProps) => {
+/* 
+    Component to toggle sort mode between alphabetical and chronological.
+    TODO: make all this sorting stuff more generic...too many hard coded values.
+*/
+const SortPlacesGroup = ({ onChange }: SortGroupProps) => {
     const [checkedValue, setCheckedValue] = useState('date')
 
     const onChangeValue = useCallback(
@@ -35,4 +40,4 @@ const SortGroup = ({ onChange }: SortGroupProps) => {
     )
 }
 
-export default SortGroup
+export default SortPlacesGroup

@@ -30,6 +30,15 @@ const fakePlaces = [
     },
 ]
 
+const checkPlaceCardRendered = (place) => {
+    const placeTitle = screen.getByText(place.title)
+    const placeDescription = screen.getByText(place.description)
+    const placeDate = screen.getByText(place.date.toDateString())
+    expect(placeTitle).toBeInTheDocument()
+    expect(placeDescription).toBeInTheDocument()
+    expect(placeDate).toBeInTheDocument()
+}
+
 describe('PlacesList', () => {
     test('Should render a PlacesList component without error.', () => {
         const onChange = jest.fn()
@@ -41,15 +50,9 @@ describe('PlacesList', () => {
             />
         )
 
-        // check that each place was properly rendered into the list
-        const placeA = screen.getByText(fakePlaces[0].title)
-        expect(placeA).toBeInTheDocument()
-
-        // assert chronological button is displayed
-        const placeB = screen.getByText(fakePlaces[1].title)
-        expect(placeB).toBeInTheDocument()
-
-        const placeC = screen.getByText(fakePlaces[2].title)
-        expect(placeC).toBeInTheDocument()
+        // assert that each place was properly rendered into the list
+        checkPlaceCardRendered(fakePlaces[0])
+        checkPlaceCardRendered(fakePlaces[1])
+        checkPlaceCardRendered(fakePlaces[2])
     })
 })

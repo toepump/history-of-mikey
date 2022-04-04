@@ -39,7 +39,7 @@ describe('FilterPlacesGroup', () => {
         const filterTitle = screen.getByText('Filter')
         expect(filterTitle).toBeInTheDocument()
 
-        // assert all check buttons were generated from the unique "types" found in the input lis of places
+        // assert all check buttons were generated from the unique "types" found in the input list of places
         const lifeBtn = screen.getByText(/life/i)
         expect(lifeBtn).toBeInTheDocument()
 
@@ -53,8 +53,12 @@ describe('FilterPlacesGroup', () => {
         const onChange = jest.fn()
         render(<FilterPlacesGroup places={fakePlaces} onChange={onChange} />)
 
+        const lifeBtn = screen.getByText(/life/i)
+        const workBtn = screen.getByText(/work/i)
+        const eduBtn = screen.getByText(/education/i)
+
         // simulate click to filter out life places
-        fireEvent.click(screen.getByText(/life/i))
+        fireEvent.click(lifeBtn)
         expect(onChange).toHaveBeenCalledWith([
             ...workPlaces,
             ...educationPlaces,
@@ -62,21 +66,22 @@ describe('FilterPlacesGroup', () => {
         expect(onChange).toHaveBeenCalledTimes(1)
 
         // simulate click to filter out work places
-        fireEvent.click(screen.getByText(/work/i))
+        fireEvent.click(workBtn)
         expect(onChange).toHaveBeenCalledWith([...educationPlaces])
         expect(onChange).toHaveBeenCalledTimes(2)
 
         // simulate click to filter out education places
-        fireEvent.click(screen.getByText(/education/i))
+        fireEvent.click(eduBtn)
         expect(onChange).toHaveBeenCalledWith([])
         expect(onChange).toHaveBeenCalledTimes(3)
 
         // filter back in life places
-        fireEvent.click(screen.getByText(/life/i))
+        fireEvent.click(lifeBtn)
         // filter back in work places
-        fireEvent.click(screen.getByText(/work/i))
+        fireEvent.click(workBtn)
         // filter back in education places
-        fireEvent.click(screen.getByText(/education/i))
+        fireEvent.click(eduBtn)
+
         // by this point, the onChange should have been called with all places filtered back in
         expect(onChange).toHaveBeenCalledWith(fakePlaces)
         expect(onChange).toHaveBeenCalledTimes(6)

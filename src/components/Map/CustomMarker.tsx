@@ -8,6 +8,10 @@ interface CustomMarkerProps extends MarkerOptions {
     active: boolean
 }
 
+/* 
+    Component that renders a marker on a provided mapbox Map instance.
+    Will also render a popup if the marker is "active".
+*/
 const CustomMarker = ({ map, place, active }: CustomMarkerProps) => {
     const { title, date, description, coordinates, img } = place
     const popupRef = useRef<HTMLDivElement>(null)
@@ -36,7 +40,6 @@ const CustomMarker = ({ map, place, active }: CustomMarkerProps) => {
             anchor: 'bottom',
         })
 
-        // if this is marker is active, show the popup
         if (active) {
             popup
                 .setLngLat(coordinates)
@@ -52,14 +55,18 @@ const CustomMarker = ({ map, place, active }: CustomMarkerProps) => {
     }, [active, coordinates, date, description, img, map, title])
 
     return (
-        <div className='hidden'>
-            <div className='popup' ref={popupRef}>
-                <h4>{title}</h4>
-                <p>{description}</p>
-                <img src={img} />
-                <span>{date.toDateString()}</span>
-            </div>
-        </div>
+        <>
+            {active && (
+                <div className='hidden'>
+                    <div className='popup' ref={popupRef}>
+                        <h4 className='popup-title'>{title}</h4>
+                        <p className='popup-description'>{description}</p>
+                        <img className='popup-img' src={img} />
+                        <span className='popup-date'>{date.toDateString()}</span>
+                    </div>
+                </div>
+            )}
+        </>
     )
 }
 

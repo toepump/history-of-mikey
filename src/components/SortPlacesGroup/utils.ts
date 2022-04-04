@@ -1,23 +1,19 @@
-import { Place } from '../../places'
+import { Place, SortableKeys } from '../../places'
 
-export const sort = (list: Place[], sortKey: string) => {
-    let newList: Place[] = []
-    switch (sortKey) {
-        case 'title': {
-            newList = list.sort((a, b) =>
-                a.title > b.title ? 1 : -1
-            )
-            break
+/* 
+    util to sort a list of places by provided sortKey
+    TODO: make this more generic as well...right now SortableKeys limits to hardcoded sort keys
+*/
+export const sortPlaces = (list: Place[], sortKey: SortableKeys) => {
+    return list.sort((p1: Place, p2: Place) => {
+        const a = p1[sortKey]
+        const b = p2[sortKey]
+        if (a < b) {
+            return -1
         }
-        case 'date': {
-            newList = list.sort((a, b) =>
-                a.date > b.date ? 1 : -1
-            )
-            break
+        if (a > b) {
+            return 1
         }
-        default: {
-            break
-        }
-    }
-    return newList
+        return 0
+    })
 }

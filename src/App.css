@@ -7,7 +7,7 @@
 }
 
 .map-container {
-    width: calc(60vw);
+    width: 60vw;
     height: calc(100vh - 40px);
     border-radius: 15px;
     overflow: hidden;
@@ -24,7 +24,7 @@
 .prev-next-cards-container {
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow: hidden;
 }
 
 .card-list {
@@ -82,8 +82,26 @@
     display: none;
 }
 
-.popup img {
+.mapboxgl-popup-content {
+    border-radius: 10px;
+}
+
+.popup-img {
     max-width: 100% !important;
     height: auto;
     border-radius: 5px;
+    margin: 5px 0px;
+}
+
+.popup-date {
+    float: right;
+    margin-right: 5px;
+}
+
+/* Responsive styles for narrower viewports */
+@media only screen and (max-width: 1080px) {
+    .map-container {
+        width: 90vw;
+        height: 50vh;
+    }
 }

@@ -4,22 +4,23 @@ import {
     Map,
     PlacesList,
     PrevNextPlaceButtons,
-    sort,
+    sortPlaces,
     SortPlacesGroup,
 } from './components'
-import { default as data, Place } from './places'
+import { default as data, Place, SortableKeys } from './places'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './App.css'
 
-const allPlaces = data.entries as Place[]
+const allPlaces = data.entries
 
 function App() {
     // app state
     const [visiblePlaces, setVisiblePlaces] = useState<Place[]>(allPlaces)
     const [currentPlace, setCurrentPlace] = useState<Place>(allPlaces[0])
-    const [activeSortKey, setActiveSortKey] = useState<string>('date')
+    const [activeSortKey, setActiveSortKey] = useState<SortableKeys>('date')
 
-    // callback to update visiblePlaces and currentPlace when an updated list is provided
+    // callback to update visiblePlaces. Also checks if currentPlaces
+    // was removed from visiblePlaces and updates if needed
     const updateVisiblePlaces = useCallback(
         (updatedList: Place[]) => {
             setVisiblePlaces([...updatedList])
@@ -29,9 +30,10 @@ function App() {
         [currentPlace]
     )
 
-    // filtered and sorted list can always be derived from filters and sort mode
+    // places list to display: derived by sorting
+    // visiblePlaces whenever they, or the sort mode, changes.
     const sortedAndFilteredPlaces = useMemo(() => {
-        return sort(visiblePlaces, activeSortKey)
+        return sortPlaces(visiblePlaces, activeSortKey)
     }, [visiblePlaces, activeSortKey])
 
     return (
@@ -50,7 +52,7 @@ function App() {
                     <PrevNextPlaceButtons
                         places={sortedAndFilteredPlaces}
                         currentPlace={currentPlace}
-                        updateCurrentPlace={setCurrentPlace}
+                        onChange={setCurrentPlace}
                     />
                     <PlacesList
                         places={sortedAndFilteredPlaces}

@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 interface RadioButtonProps {
     label: string
@@ -6,6 +6,9 @@ interface RadioButtonProps {
     checked: boolean
 }
 
+/* 
+    Generic radio button component
+*/
 const RadioButton = ({ label, onChange, checked }: RadioButtonProps) => {
     return (
         <label htmlFor={label}>

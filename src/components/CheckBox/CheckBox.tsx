@@ -5,6 +5,9 @@ interface CheckBoxProps {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
+/* 
+    Generic checkbox component
+*/
 const CheckBox = ({ label, onChange }: CheckBoxProps) => {
     const [active, setActive] = useState(true)
 

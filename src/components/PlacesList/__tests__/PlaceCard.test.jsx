@@ -18,7 +18,6 @@ describe('PlaceCard', () => {
         const onChange = jest.fn()
         render(
             <PlaceCard
-                data-test-id='test'
                 onClick={onChange}
                 place={fakePlace}
                 active={true}
@@ -39,7 +38,6 @@ describe('PlaceCard', () => {
         const onChange = jest.fn()
         render(
             <PlaceCard
-                data-test-id='test'
                 onClick={onChange}
                 place={fakePlace}
                 active={true}

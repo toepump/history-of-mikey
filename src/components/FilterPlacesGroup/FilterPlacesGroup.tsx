@@ -8,12 +8,18 @@ interface FilterPlacesGroup {
     onChange: (updatedList: Place[]) => void
 }
 
+/* 
+    Component that renders a filter group (of checkboxes) to filter place data
+*/
 const FilterPlacesGroup = ({ places, onChange }: FilterPlacesGroup) => {
     const { filterStates, applyFilter } = useFilterGroup(places)
 
     const onFilterChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
-            const newList = applyFilter(event.target.value, event.target.checked)
+            const newList = applyFilter(
+                event.target.value,
+                event.target.checked
+            )
             onChange(newList)
         },
         [applyFilter, onChange]

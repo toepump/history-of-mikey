@@ -27,21 +27,37 @@ const fakePlaces = [
 ]
 
 describe('PrevNextPlaceButtons', () => {
+    const updateCurrentPlace = jest.fn()
     test('Should render a PrevNextPlacesButtons component without error.', () => {
-        const updateCurrentPlace = jest.fn()
-        render(<PrevNextPlaceButtons places={fakePlaces} currentPlace={fakePlaces[0]} updateCurrentPlace={updateCurrentPlace} />)
+        render(
+            <PrevNextPlaceButtons
+                places={fakePlaces}
+                currentPlace={fakePlaces[0]}
+                updateCurrentPlace={updateCurrentPlace}
+            />
+        )
     })
     test('Should call onChange with next place in list', () => {
-        const updateCurrentPlace = jest.fn()
-        render(<PrevNextPlaceButtons places={fakePlaces} currentPlace={fakePlaces[0]} updateCurrentPlace={updateCurrentPlace} />)
+        render(
+            <PrevNextPlaceButtons
+                places={fakePlaces}
+                currentPlace={fakePlaces[0]}
+                updateCurrentPlace={updateCurrentPlace}
+            />
+        )
 
         fireEvent.click(screen.getByText(/next/i))
         expect(updateCurrentPlace).toHaveBeenCalledWith(fakePlaces[1])
         expect(updateCurrentPlace).toHaveBeenCalledTimes(1)
     })
     test('Should call onChange with prev place in list', () => {
-        const updateCurrentPlace = jest.fn()
-        render(<PrevNextPlaceButtons places={fakePlaces} currentPlace={fakePlaces[2]} updateCurrentPlace={updateCurrentPlace} />)
+        render(
+            <PrevNextPlaceButtons
+                places={fakePlaces}
+                currentPlace={fakePlaces[2]}
+                updateCurrentPlace={updateCurrentPlace}
+            />
+        )
 
         fireEvent.click(screen.getByText(/prev/i))
         expect(updateCurrentPlace).toHaveBeenCalledWith(fakePlaces[1])

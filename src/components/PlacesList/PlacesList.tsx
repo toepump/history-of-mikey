@@ -7,6 +7,9 @@ interface PlacesListProps {
     onPlaceClick: (place: Place) => void
 }
 
+/* 
+    Component to render list of PlaceCards.
+*/
 const PlacesList = ({
     places,
     currentPlace,
