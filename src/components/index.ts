@@ -1,7 +1,7 @@
 export { CheckBox, RadioButton } from './common'
 export {
     FilterPlacesGroup,
-    useFilters,
+    usePlaceFilters,
     createFilterStates,
     filter,
 } from './FilterPlacesGroup'

@@ -4,9 +4,9 @@ import {
     Map,
     PlacesList,
     PrevNextPlaceButtons,
-    sortPlaces,
     SortPlacesGroup,
 } from './components'
+import { sortPlaces } from './components/SortPlacesGroup/utils'
 import { default as data, Place, SortableKeys } from './places'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './App.css'
@@ -19,8 +19,10 @@ function App() {
     const [currentPlace, setCurrentPlace] = useState<Place>(allPlaces[0])
     const [activeSortMode, setActiveSortMode] = useState<SortableKeys>('date')
 
-    // callback to update visiblePlaces. Also checks if currentPlaces
-    // was removed from visiblePlaces and updates if needed
+    const sortedAndFilteredPlaces = useMemo(() => {
+        return sortPlaces(visiblePlaces, activeSortMode)
+    }, [visiblePlaces, activeSortMode])
+
     const updateVisiblePlaces = useCallback(
         (updatedList: Place[]) => {
             setVisiblePlaces(updatedList)
@@ -29,12 +31,6 @@ function App() {
         },
         [currentPlace]
     )
-
-    // places list to display: derived by sorting visiblePlaces
-    // whenever it changes or if the sort mode changes.
-    const sortedAndFilteredPlaces = useMemo(() => {
-        return sortPlaces(visiblePlaces, activeSortMode)
-    }, [visiblePlaces, activeSortMode])
 
     return (
         <div className='app-container'>

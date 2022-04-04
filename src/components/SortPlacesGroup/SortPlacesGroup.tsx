@@ -7,7 +7,9 @@ interface SortGroupProps {
 }
 
 /* 
-    Component to toggle sort mode between alphabetical and chronological.a
+    Component to toggle sort mode between alphabetical and chronological.
+    NOTE: functionally this would be a generic RadioButtonsGroup, but since the modes are hardcoded
+    I'm calling it SortPlacesGroup.
 */
 const SortPlacesGroup = ({ onChange }: SortGroupProps) => {
     const [checkedValue, setCheckedValue] = useState('date')

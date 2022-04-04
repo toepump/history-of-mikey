@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { CheckBox } from '../common'
 import { Place } from '../../places'
-import useFilterGroup from './useFilters'
+import usePlaceFilters from './usePlaceFilters'
 
 interface FilterPlacesGroup {
     places: Place[]
@@ -9,10 +9,10 @@ interface FilterPlacesGroup {
 }
 
 /* 
-    Component that renders a filter group (of checkboxes) to filter place data
+    Component that renders a filter group (of checkboxes) to filter place data by type
 */
 const FilterPlacesGroup = ({ places, onChange }: FilterPlacesGroup) => {
-    const { filterStates, applyFilter } = useFilterGroup(places)
+    const { filterStates, applyFilter } = usePlaceFilters(places)
 
     const onFilterChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {

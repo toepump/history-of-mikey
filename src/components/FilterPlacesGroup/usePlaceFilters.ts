@@ -3,11 +3,11 @@ import { Place } from '../../places'
 import { createFilterStates, filter, FilterState } from './utils'
 
 /* 
-    Hook that manages states for a group of Places filters.
+    Hook that manages states for a group of Place filters.
     Given a list of Places, extracts the unique values from the 'type' property
     and provides a function to let you filter the input list by those types.
 */
-const useFilterGroup = (list: Place[]) => {
+const usePlaceFilters = (list: Place[]) => {
     const [filterStates, setFilterStates] = useState<FilterState>({})
 
     // on initial render, create filter states to track
@@ -36,4 +36,4 @@ const useFilterGroup = (list: Place[]) => {
     }
 }
 
-export default useFilterGroup
+export default usePlaceFilters
