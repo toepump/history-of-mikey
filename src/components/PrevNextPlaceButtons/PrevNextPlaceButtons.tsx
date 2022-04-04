@@ -25,7 +25,9 @@ const PrevNextPlaceButtons = ({
         const nextIndex =
             currentIndex + 1 >= places.length ? currentIndex : currentIndex + 1
 
-        onChange(places[nextIndex])
+        if (places[nextIndex]) {
+            onChange(places[nextIndex])
+        }
     }, [places, onChange, currentPlace.title])
 
     // figure out which card is previous relative to current
@@ -36,7 +38,9 @@ const PrevNextPlaceButtons = ({
 
         const prevIndex = currentIndex - 1 < 0 ? currentIndex : currentIndex - 1
 
-        onChange(places[prevIndex])
+        if (places[prevIndex]) {
+            onChange(places[prevIndex])
+        }
     }, [places, onChange, currentPlace.title])
 
     return (
