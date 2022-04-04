@@ -32,7 +32,7 @@
     flex-direction: column;
     padding: 5px 20px;
     scroll-padding: 5px 20px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .card-list-container > :last-child {

@@ -50,14 +50,24 @@ const alphabeticalFakePlaces = [
     },
 ]
 
+// test data with same places
+const sameFakePlaces = [alphabeticalFakePlaces[0], alphabeticalFakePlaces[0]]
+
 describe('SortPlacesGroup utils', () => {
     test('sortPlaces util should correctly sort lists of places.', () => {
         // sort alphabetically
-        const sortedAlphabetically = sortPlaces(chronologicalFakePlaces, 'title')
+        const sortedAlphabetically = sortPlaces(
+            chronologicalFakePlaces,
+            'title'
+        )
         expect(sortedAlphabetically).toEqual(alphabeticalFakePlaces)
 
         // sort chronologically
         const sortedChronologically = sortPlaces(sortedAlphabetically, 'date')
         expect(sortedChronologically).toEqual(chronologicalFakePlaces)
+    })
+    test('sortPlaces util should gracefully handle sorting list of same places.', () => {
+        // assert if places are same, nothing changed
+        expect(sortPlaces(sameFakePlaces, 'date')).toEqual(sameFakePlaces)
     })
 })

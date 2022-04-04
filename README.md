@@ -6,9 +6,8 @@ Hi! My name is Michael Kentaro Cho!
 
 1. run `npm install` to get dependencies
 2. run `npm start` to start the development server at `localhost:3000`
-3. run `npm test` to run unit tests in interactive watch mode
-    - note: hit `a` while in watch mode to run all tests
-4. run `npm run coverage` to to get a test coverage report
+3. run `npm test` to run all unit tests in interactive watch mode
+4. run `npm run coverage` to get a test coverage report
     - note: hit `a` to run all tests and get a better coverage report
 ## Checklist
 
@@ -42,9 +41,9 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `npm run coverage`
 
-Runs the same script as    `npm test` above, but with the added `--coverage` flag to execute a code-coverage test and report results back.
+Runs the same script as `npm test` above, but with the added `--coverage` flag to execute a code-coverage test and report results back.
 
-_NOTE_: the test runner is launched in interactive watch mode by default. Follow the output instructions in the terminal to run all tests, only failed tests, etc.
+_NOTE_: the test runner is launched in interactive watch mode by default. Follow the output instructions in the terminal to quit, run all tests, only failed tests, etc.
 
 ### `npm run build`
 
