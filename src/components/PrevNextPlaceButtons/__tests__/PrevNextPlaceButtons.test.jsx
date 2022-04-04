@@ -33,7 +33,7 @@ describe('PrevNextPlaceButtons', () => {
             <PrevNextPlaceButtons
                 places={fakePlaces}
                 currentPlace={fakePlaces[0]}
-                updateCurrentPlace={updateCurrentPlace}
+                onChange={updateCurrentPlace}
             />
         )
     })
@@ -42,7 +42,7 @@ describe('PrevNextPlaceButtons', () => {
             <PrevNextPlaceButtons
                 places={fakePlaces}
                 currentPlace={fakePlaces[0]}
-                updateCurrentPlace={updateCurrentPlace}
+                onChange={updateCurrentPlace}
             />
         )
 
@@ -55,7 +55,7 @@ describe('PrevNextPlaceButtons', () => {
             <PrevNextPlaceButtons
                 places={fakePlaces}
                 currentPlace={fakePlaces[2]}
-                updateCurrentPlace={updateCurrentPlace}
+                onChange={updateCurrentPlace}
             />
         )
 

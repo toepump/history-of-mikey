@@ -7,8 +7,7 @@ interface SortGroupProps {
 }
 
 /* 
-    Component to toggle sort mode between alphabetical and chronological.
-    TODO: make all this sorting stuff more generic...too many hard coded values.
+    Component to toggle sort mode between alphabetical and chronological.a
 */
 const SortPlacesGroup = ({ onChange }: SortGroupProps) => {
     const [checkedValue, setCheckedValue] = useState('date')

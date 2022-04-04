@@ -17,24 +17,24 @@ function App() {
     // app state
     const [visiblePlaces, setVisiblePlaces] = useState<Place[]>(allPlaces)
     const [currentPlace, setCurrentPlace] = useState<Place>(allPlaces[0])
-    const [activeSortKey, setActiveSortKey] = useState<SortableKeys>('date')
+    const [activeSortMode, setActiveSortMode] = useState<SortableKeys>('date')
 
     // callback to update visiblePlaces. Also checks if currentPlaces
     // was removed from visiblePlaces and updates if needed
     const updateVisiblePlaces = useCallback(
         (updatedList: Place[]) => {
-            setVisiblePlaces([...updatedList])
-            if (!updatedList.includes(currentPlace))
+            setVisiblePlaces(updatedList)
+            if (updatedList.length && !updatedList.includes(currentPlace))
                 setCurrentPlace(updatedList[0])
         },
         [currentPlace]
     )
 
-    // places list to display: derived by sorting
-    // visiblePlaces whenever they, or the sort mode, changes.
+    // places list to display: derived by sorting visiblePlaces
+    // whenever it changes or if the sort mode changes.
     const sortedAndFilteredPlaces = useMemo(() => {
-        return sortPlaces(visiblePlaces, activeSortKey)
-    }, [visiblePlaces, activeSortKey])
+        return sortPlaces(visiblePlaces, activeSortMode)
+    }, [visiblePlaces, activeSortMode])
 
     return (
         <div className='app-container'>
@@ -45,7 +45,7 @@ function App() {
                         places={allPlaces}
                         onChange={updateVisiblePlaces}
                     />
-                    <SortPlacesGroup onChange={setActiveSortKey} />
+                    <SortPlacesGroup onChange={setActiveSortMode} />
                 </div>
                 <div className='prev-next-cards-container'>
                     <h3>Places</h3>
